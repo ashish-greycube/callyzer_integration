@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include callyzer_integration *.css
+recursive-include callyzer_integration *.csv
+recursive-include callyzer_integration *.html
+recursive-include callyzer_integration *.ico
+recursive-include callyzer_integration *.js
+recursive-include callyzer_integration *.json
+recursive-include callyzer_integration *.md
+recursive-include callyzer_integration *.png
+recursive-include callyzer_integration *.py
+recursive-include callyzer_integration *.svg
+recursive-include callyzer_integration *.txt
+recursive-exclude callyzer_integration *.pyc
