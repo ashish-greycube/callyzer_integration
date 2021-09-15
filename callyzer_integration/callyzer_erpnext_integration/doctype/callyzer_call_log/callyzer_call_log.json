@@ -1,0 +1,139 @@
+{
+ "actions": [],
+ "creation": "2021-09-14 09:35:32.090740",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "processed_data",
+  "employee_mobile",
+  "customer_mobile",
+  "column_break_9",
+  "raw_date",
+  "employee",
+  "client",
+  "date",
+  "time",
+  "duration",
+  "calltype",
+  "note",
+  "raw_log",
+  "integration_request"
+ ],
+ "fields": [
+  {
+   "fieldname": "raw_date",
+   "fieldtype": "Heading",
+   "label": "Raw Data"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "client",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Client",
+   "read_only": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Duration",
+   "hide_days": 1,
+   "label": "Duration",
+   "read_only": 1
+  },
+  {
+   "fieldname": "calltype",
+   "fieldtype": "Select",
+   "label": "Call Type",
+   "options": "\nIncoming\nOutgoing\nMissed\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Data",
+   "label": "Note",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "processed_data",
+   "fieldtype": "Heading",
+   "label": "Processed Data"
+  },
+  {
+   "fieldname": "employee_mobile",
+   "fieldtype": "Data",
+   "label": "Sales Person Mobile",
+   "options": "Phone",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer_mobile",
+   "fieldtype": "Data",
+   "label": "Customer Mobile",
+   "options": "Phone",
+   "read_only": 1
+  },
+  {
+   "fieldname": "raw_log",
+   "fieldtype": "Code",
+   "label": "Raw Log",
+   "read_only": 1
+  },
+  {
+   "fieldname": "integration_request",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Integration Request",
+   "options": "Integration Request",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-09-15 17:55:44.348047",
+ "modified_by": "Administrator",
+ "module": "Callyzer ERPNext Integration",
+ "name": "Callyzer Call Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

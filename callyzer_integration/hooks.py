@@ -58,7 +58,7 @@ app_license = "MIT"
 
 # before_install = "callyzer_integration.install.before_install"
 # after_install = "callyzer_integration.install.after_install"
-
+after_migrate="callyzer_integration.migrations.after_migrations"
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
@@ -99,7 +99,13 @@ app_license = "MIT"
 
 # Scheduled Tasks
 # ---------------
-
+scheduler_events = {
+	"cron": {
+		"0/5 * * * *": [
+			"callyzer_integration.callyzer_integration_hook.auto_pull_callyzer_logs"
+		]
+	}
+}
 # scheduler_events = {
 # 	"all": [
 # 		"callyzer_integration.tasks.all"
@@ -173,3 +179,9 @@ user_data_fields = [
 # 	"callyzer_integration.auth.validate"
 # ]
 
+fixtures = [
+      {
+        "dt": "Custom Field", 
+        "filters": [["name", "in", ['Sales Person-mobile_no_cf']]]
+      }	   			     
+]

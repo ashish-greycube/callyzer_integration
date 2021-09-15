@@ -1,0 +1,97 @@
+{
+ "cards_label": "Callyzer",
+ "category": "Administration",
+ "charts": [],
+ "creation": "2021-09-15 09:17:13.132843",
+ "developer_mode_only": 0,
+ "disable_user_customization": 0,
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "extends_another_page": 0,
+ "hide_custom": 0,
+ "icon": "support",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "label": "Callyzer",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Callyzer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Callyzer Settings",
+   "link_to": "Callyzer Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Callyzer Call Log",
+   "link_to": "Callyzer Call Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "API Call Log",
+   "link_to": "Integration Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Error Log",
+   "link_to": "Error Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Lead Wise Call Analysis",
+   "link_to": "Lead Wise Call Analysis",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Sales Person Call Analysis",
+   "link_to": "Sales Person Call Analysis",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2021-09-15 16:53:46.412826",
+ "modified_by": "Administrator",
+ "module": "Callyzer ERPNext Integration",
+ "name": "Callyzer",
+ "owner": "Administrator",
+ "pin_to_bottom": 0,
+ "pin_to_top": 1,
+ "shortcuts": []
+}
