@@ -9,7 +9,7 @@ frappe.query_reports["Sales Person Call Analysis"] = {
 			"label": __("Call From Date"),
 			"fieldtype": "Date",
 			"reqd": 1,
-			"default": frappe.datetime.add_days(frappe.datetime.nowdate(), -30)
+			"default": frappe.datetime.add_days(frappe.datetime.nowdate(), -1)
 		},
 		{
 			"fieldname": "to_date",

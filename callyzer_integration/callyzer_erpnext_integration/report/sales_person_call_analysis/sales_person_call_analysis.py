@@ -18,7 +18,7 @@ def execute(filters=None):
 				'options': 'Sales Person',
 				'fieldname': 'sales_person',
 				'fieldtype': 'Link',
-				'width': 240
+				'width': 300
 		},
 		{
 			'fieldname': 'first_call',

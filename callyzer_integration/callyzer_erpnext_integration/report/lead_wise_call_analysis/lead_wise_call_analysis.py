@@ -12,7 +12,7 @@ def execute(filters=None):
 				'options': 'Lead',
 				'fieldname': 'lead_id',
 				'fieldtype': 'Link',
-				'width': 100
+				'width': 130
 		},
 		{
 				'label': _('Lead Owner'),
@@ -31,7 +31,7 @@ def execute(filters=None):
 			"fieldname": "territory",
 			"fieldtype": "Link",
 			"options": "Territory",
-			"width": 100
+			"width": 130
 		},
 		{
 			"label": _("Lead Name"),
