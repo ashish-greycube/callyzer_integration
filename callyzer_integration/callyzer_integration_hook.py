@@ -86,7 +86,7 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 	except Exception as e:
 		print(e)
 		frappe.db.set_value('Integration Request', integration_request.name, 'status', 'Failed')
-		if e.response:
+		if hasattr(e, 'response'):
 			frappe.log_error(frappe.get_traceback()+'\n\n\n'+e.response.text, title=_('Callyzer Error'))
 		else:
 			frappe.log_error(frappe.get_traceback(), title=_('Callyzer Error'))
