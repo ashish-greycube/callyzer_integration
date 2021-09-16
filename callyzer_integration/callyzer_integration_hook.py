@@ -90,6 +90,8 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 			frappe.log_error(frappe.get_traceback()+'\n\n\n'+e.response.text, title=_('Callyzer Error'))
 		else:
 			frappe.log_error(frappe.get_traceback(), title=_('Callyzer Error'))
+			# set last time, as error is not with api cal but in data..so move ahead
+			frappe.db.set_value('Callyzer Settings','Callyzer Settings', 'last_api_call_time', end_time)
 		return		
 
 def make_callyzer_call_log_records(call_row,integration_request):
