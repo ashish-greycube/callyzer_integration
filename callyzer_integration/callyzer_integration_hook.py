@@ -51,7 +51,7 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 			"callEndDate" : end_time.strftime(DATE_FORMAT),
 			"callStartTime" : start_time.strftime(TIME_FORMAT),
 			"callEndTime" : end_time.strftime(TIME_FORMAT),
-			"pageSize" : 5000		
+			"pageSize" : 50000		
 		}	
 
 		# call URL
