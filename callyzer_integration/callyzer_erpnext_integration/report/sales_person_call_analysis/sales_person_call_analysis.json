@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": "Standard",
- "modified": "2021-09-17 11:04:38.736749",
+ "modified": "2021-09-17 11:39:24.263805",
  "modified_by": "Administrator",
  "module": "Callyzer ERPNext Integration",
  "name": "Sales Person Call Analysis",
@@ -30,7 +30,10 @@
    "role": "Sales Master Manager"
   },
   {
-   "role": "Sales User"
+   "role": "HR User"
+  },
+  {
+   "role": "HR Manager"
   }
  ]
 }
