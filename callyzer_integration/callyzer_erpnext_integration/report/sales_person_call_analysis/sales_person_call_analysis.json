@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": "Standard",
- "modified": "2021-09-15 10:58:28.300189",
+ "modified": "2021-09-17 11:04:38.736749",
  "modified_by": "Administrator",
  "module": "Callyzer ERPNext Integration",
  "name": "Sales Person Call Analysis",
@@ -19,5 +19,18 @@
  "ref_doctype": "Callyzer Call Log",
  "report_name": "Sales Person Call Analysis",
  "report_type": "Script Report",
- "roles": []
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Sales Manager"
+  },
+  {
+   "role": "Sales Master Manager"
+  },
+  {
+   "role": "Sales User"
+  }
+ ]
 }
