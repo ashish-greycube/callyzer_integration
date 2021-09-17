@@ -53,7 +53,6 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 			"callEndTime" : end_time.strftime(TIME_FORMAT),
 			"pageSize" : 50000		
 		}	
-
 		# call URL
 		integration_request=create_request_log(data=frappe._dict(data),integration_type="Remote",service_name="Callyzer")
 		response = make_post_request(url, headers=headers, data=data)
@@ -87,9 +86,9 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 		print(e)
 		frappe.db.set_value('Integration Request', integration_request.name, 'status', 'Failed')
 		if hasattr(e, 'response'):
-			frappe.log_error(frappe.get_traceback()+'\n\n\n'+e.response.text, title=_('Callyzer Error'))
+			frappe.log_error(frappe.get_traceback()+'\n\n\n'+json.dumps(data)+'\n\n\n'+e.response.text, title=_('Callyzer Error'))
 		else:
-			frappe.log_error(frappe.get_traceback(), title=_('Callyzer Error'))
+			frappe.log_error(frappe.get_traceback()+'\n\n\n'+json.dumps(data), title=_('Callyzer Error'))
 			# set last time, as error is not with api cal but in data..so move ahead
 			frappe.db.set_value('Callyzer Settings','Callyzer Settings', 'last_api_call_time', end_time)
 		return		
@@ -97,8 +96,8 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 def make_callyzer_call_log_records(call_row,integration_request):
 	# pattern = "\((.*?)\)"
 	# customer_mobile_search=re.search(pattern, call_row.get('client',None))
-	customer_mobile=call_row.get('client',None).rsplit("(")[-1].strip(")")
-	employee_mobile=call_row.get('employee',None).rsplit("(")[-1].strip(")")
+	customer_mobile=call_row.get('client',None).rsplit("(")[-1].strip(")").lstrip('0')
+	employee_mobile=call_row.get('employee',None).rsplit("(")[-1].strip(")").lstrip('0')
 	date=getdate(format_date(call_row.get('date',None)))
 	time=format_time(call_row.get('time',None))
 	existing_callyzer_call_log = frappe.db.get_value("Callyzer Call Log", {"customer_mobile": customer_mobile,"date":date,"time":time})
