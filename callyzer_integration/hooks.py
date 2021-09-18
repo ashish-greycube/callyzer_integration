@@ -59,6 +59,7 @@ doctype_js = {"Lead" : "public/js/lead.js"}
 # before_install = "callyzer_integration.install.before_install"
 # after_install = "callyzer_integration.install.after_install"
 # after_migrate="callyzer_integration.migrations.after_migrations"
+after_migrate="callyzer_integration.migrations.after_migrate"
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
