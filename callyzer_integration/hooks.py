@@ -180,6 +180,6 @@ user_data_fields = [
 fixtures = [
       {
         "dt": "Custom Field", 
-        "filters": [["name", "in", ['Sales Person-mobile_no_cf','Lead-call_info_cf	']]]
+        "filters": [["name", "in", ['Sales Person-mobile_no_cf','Lead-call_info_cf']]]
       }	   			     
 ]
