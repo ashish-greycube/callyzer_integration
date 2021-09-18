@@ -121,3 +121,29 @@ def make_callyzer_call_log_records(call_row,integration_request):
 		print('Duplicate')
 		pass
 	return	
+
+@frappe.whitelist()
+def load_lead_call_info(self,method):
+		if self.mobile_no:	
+			call_info = get_call_info(self.mobile_no)
+			self.set_onload('call_info_content', call_info)	
+
+def get_call_info(mobile_no):
+	data = frappe.db.sql('''
+select 
+lead.name as Lead,
+lead.mobile_no as `Customer No`,
+min(addtime(call_log.date, call_log.time))as `First Call`, 
+max(addtime(call_log.date, call_log.time))as `Last Call`,
+COUNT(call_log.name) as `Total#`,
+COUNT(CASE WHEN call_log.calltype = 'Outgoing' THEN call_log.name ELSE NULL END) as `Outgoing#`,
+COUNT(CASE WHEN call_log.calltype = 'Incoming' THEN call_log.name ELSE NULL END) as `Incoming#`,
+COUNT(CASE WHEN call_log.calltype = 'Missed' THEN call_log.name ELSE NULL END) as `Missed#`,
+COUNT(CASE WHEN call_log.calltype = 'Rejected' THEN call_log.name ELSE NULL END) as `Rejected#`
+FROM  `tabCallyzer Call Log` call_log
+inner join `tabLead` lead
+on call_log.customer_mobile = lead.mobile_no 
+WHERE lead.mobile_no=%s
+group by lead.mobile_no
+	''', (mobile_no),as_dict=True)		
+	return data	

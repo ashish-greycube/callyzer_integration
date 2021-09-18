@@ -14,7 +14,7 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/callyzer_integration/css/callyzer_integration.css"
-# app_include_js = "/assets/callyzer_integration/js/callyzer_integration.js"
+app_include_js = "/assets/callyzer_integration/js/templates/call_info_template.html"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/callyzer_integration/css/callyzer_integration.css"
@@ -31,7 +31,7 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Lead" : "public/js/lead.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -89,13 +89,11 @@ after_migrate="callyzer_integration.migrations.after_migrations"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	"Lead": {
+		"onload": "callyzer_integration.callyzer_integration_hook.load_lead_call_info",
+	}
+}
 
 # Scheduled Tasks
 # ---------------
