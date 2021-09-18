@@ -1,0 +1,5 @@
+{
+	"js/callyzer_integration.min.js": [
+		"public/js/templates/call_info_template.html"
+	]
+}
