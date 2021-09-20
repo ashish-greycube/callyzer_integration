@@ -37,8 +37,8 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 		
 		current_datetime=now_datetime()
 		if callyzer_settings.get('last_api_call_time'):
+			# overlap of 2 times
 			start_time=get_datetime(callyzer_settings.get('last_api_call_time'))- datetime.timedelta(minutes=2)
-			# end_time=callyzer_settings.get('last_api_call_time')
 			end_time=current_datetime
 		else:
 			start_time= current_datetime - datetime.timedelta(minutes=5)
@@ -47,10 +47,10 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 		DATE_FORMAT='%Y-%m-%d'
 		TIME_FORMAT='%H:%M'
 		data={
-			"callStartDate" : start_time.strftime(DATE_FORMAT),
-			"callEndDate" : end_time.strftime(DATE_FORMAT),
-			"callStartTime" : start_time.strftime(TIME_FORMAT),
-			"callEndTime" : end_time.strftime(TIME_FORMAT),
+			"syncStartDate" : start_time.strftime(DATE_FORMAT),
+			"syncEndDate" : end_time.strftime(DATE_FORMAT),
+			"syncStartTime" : start_time.strftime(TIME_FORMAT),
+			"syncEndTime" : end_time.strftime(TIME_FORMAT),
 			"pageSize" : 50000		
 		}	
 		# call URL
