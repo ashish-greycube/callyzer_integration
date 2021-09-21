@@ -38,7 +38,7 @@ def callyzer_integration_create_custom_fields(**args):
   name= 'Lead-call_info_cf'
   ),
    dict(
-  depends_on= "eval=doc.mobile_no",
+  depends_on= "eval:doc.mobile_no",
   doctype= "Custom Field",
   dt= "Lead",
   fieldname= "check_call_log_cf",
