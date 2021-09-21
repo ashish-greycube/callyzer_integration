@@ -86,6 +86,7 @@
   {
    "fieldname": "employee_mobile",
    "fieldtype": "Data",
+   "in_standard_filter": 1,
    "label": "Sales Person Mobile",
    "options": "Phone",
    "read_only": 1
@@ -93,6 +94,7 @@
   {
    "fieldname": "customer_mobile",
    "fieldtype": "Data",
+   "in_standard_filter": 1,
    "label": "Customer Mobile",
    "options": "Phone",
    "read_only": 1
@@ -114,7 +116,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-17 11:16:18.424055",
+ "modified": "2021-09-20 18:31:46.354378",
  "modified_by": "Administrator",
  "module": "Callyzer ERPNext Integration",
  "name": "Callyzer Call Log",

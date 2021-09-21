@@ -36,7 +36,18 @@ def callyzer_integration_create_custom_fields(**args):
   insert_after= 'email_id',
   label= 'Call Info',
   name= 'Lead-call_info_cf'
-  )]
+  ),
+   dict(
+  depends_on= "eval=doc.mobile_no",
+  doctype= "Custom Field",
+  dt= "Lead",
+  fieldname= "check_call_log_cf",
+  fieldtype= "Button",
+  insert_after= "call_info_cf",
+  label= "Check Call Log",
+  name= "Lead-check_call_log_cf"
+  )
+  ]
   }
 
     create_custom_fields(custom_fields)

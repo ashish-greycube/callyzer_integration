@@ -50,6 +50,12 @@ def execute(filters=None):
 			"fieldname": "mobile_no",
 			"fieldtype": "Data",
 			"width": 110
+		},		
+		{
+			'fieldname': 'first_call_response_time',
+			'label': _('First Call Response Time'),
+			'fieldtype': 'Duration',
+			'width': 180
 		},							
 		{
 			'fieldname': 'first_call',
@@ -98,6 +104,7 @@ def execute(filters=None):
 
 	data = frappe.db.sql('''
 select lead.name as lead_id,user.full_name as lead_owner,lead.status,lead.territory,lead.lead_name,lead.company_name as organization,lead.mobile_no,
+TIMESTAMPDIFF(SECOND,lead.creation,min(addtime(call_log.date, call_log.time))) as `first_call_response_time`,
 MIN(call_log.time) as first_call,MAX(call_log.`time`) as last_call, COUNT(call_log.name) as total_calls,
 COUNT(CASE WHEN call_log.calltype = 'Outgoing' THEN call_log.name ELSE NULL END) as outgoing_calls,
 COUNT(CASE WHEN call_log.calltype = 'Incoming' THEN call_log.name ELSE NULL END) as incoming_calls,

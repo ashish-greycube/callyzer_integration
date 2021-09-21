@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 import frappe
 from frappe import _
 from frappe.integrations.utils import create_request_log,make_post_request
-from frappe.utils import get_datetime,now_datetime,format_datetime,format_date,format_time,getdate, duration_to_seconds
+from frappe.utils import get_datetime,now_datetime,format_datetime,format_date,format_time,getdate, duration_to_seconds,format_duration
 from datetime import timedelta
 import datetime
 from frappe.utils.password import get_decrypted_password
@@ -127,12 +127,15 @@ def load_lead_call_info(self,method):
 		if self.mobile_no:	
 			call_info = get_call_info(self.mobile_no)
 			self.set_onload('call_info', call_info)	
+# TIMEDIFF(DATE_FORMAT(min(addtime(call_log.date, call_log.time)) ,"%Y-%m-%d %H:%i"),DATE_FORMAT(lead.creation ,"%Y-%m-%d %H:%i")) as `first_call_response_time`,
 
 def get_call_info(mobile_no):
 	data = frappe.db.sql('''
 select 
 lead.name as lead_name,
 lead.mobile_no as `customer_no`,
+lead.creation as creation,
+TIMESTAMPDIFF(SECOND,lead.creation,min(addtime(call_log.date, call_log.time))) as `first_call_response_time`,
 min(addtime(call_log.date, call_log.time)) as `first_call`, 
 max(addtime(call_log.date, call_log.time)) as `last_call`,
 COUNT(call_log.name) as `total_count`,
@@ -145,5 +148,9 @@ inner join `tabLead` lead
 on call_log.customer_mobile = lead.mobile_no 
 WHERE lead.mobile_no=%s
 group by lead.mobile_no
-	''', (mobile_no),as_dict=True)		
-	return data[0]	if data else None
+	''', (mobile_no),as_dict=True)
+	result=data[0]	if data else None
+	if result:
+		if 'first_call_response_time' in result:
+			result['first_call_response_time']=format_duration(result['first_call_response_time'])
+	return  result
