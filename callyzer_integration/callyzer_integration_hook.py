@@ -8,6 +8,7 @@ import datetime
 from frappe.utils.password import get_decrypted_password
 import json
 import re
+from frappe.utils.background_jobs import enqueue
 
 
 def get_callyzer_configuration():
@@ -78,7 +79,8 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 				for x ,y in frappe._dict(response).items():
 					if x == 'data':
 						for call_row in y:
-							callyzer_call_log=make_callyzer_call_log_records(call_row,integration_request.name)
+							# callyzer_call_log=make_callyzer_call_log_records(call_row,integration_request.name)
+							frappe.enqueue(make_callyzer_call_log_records,call_row=call_row,integration_request=integration_request.name, queue='long')
 			frappe.db.set_value('Integration Request', integration_request.name, 'status', 'Completed')
 			frappe.db.set_value('Callyzer Settings','Callyzer Settings', 'last_api_call_time', end_time)
 			return
