@@ -79,8 +79,10 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 				for x ,y in frappe._dict(response).items():
 					if x == 'data':
 						for call_row in y:
-							# callyzer_call_log=make_callyzer_call_log_records(call_row,integration_request.name)
-							frappe.enqueue(make_callyzer_call_log_records,call_row=call_row,integration_request=integration_request.name, queue='long')
+							if	recordsTotal<100:
+								callyzer_call_log=make_callyzer_call_log_records(call_row,integration_request.name)
+							else:
+								frappe.enqueue(make_callyzer_call_log_records,call_row=call_row,integration_request=integration_request.name, queue='long')
 			frappe.db.set_value('Integration Request', integration_request.name, 'status', 'Completed')
 			frappe.db.set_value('Callyzer Settings','Callyzer Settings', 'last_api_call_time', end_time)
 			return
@@ -98,7 +100,7 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 def make_callyzer_call_log_records(call_row,integration_request):
 	# pattern = "\((.*?)\)"
 	# customer_mobile_search=re.search(pattern, call_row.get('client',None))
-	customer_mobile=call_row.get('client',None).rsplit("(")[-1].strip(")").lstrip('0')
+	customer_mobile=call_row.get('client',None).rsplit("(")[-1].strip(")").lstrip('0').rsplit("+91")[-1]
 	employee_mobile=call_row.get('employee',None).rsplit("(")[-1].strip(")").lstrip('0')
 	date=getdate(format_date(call_row.get('date',None)))
 	time=format_time(call_row.get('time',None))
@@ -106,7 +108,10 @@ def make_callyzer_call_log_records(call_row,integration_request):
 	if not existing_callyzer_call_log:
 		callyzer_call_log=frappe.new_doc('Callyzer Call Log')
 		callyzer_call_log.employee=call_row.get('employee',None)
-		callyzer_call_log.client=call_row.get('client',None)
+		client=call_row.get('client',None)
+		if len(client)>140:
+			client=client[0:140]
+		callyzer_call_log.client=client
 		callyzer_call_log.date=getdate(format_date(call_row.get('date',None)))
 		callyzer_call_log.time=format_time(call_row.get('time',None))
 		callyzer_call_log.duration=duration_to_seconds(call_row.get('duration') if call_row.get('duration')!=None else '0s')
