@@ -54,8 +54,17 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 			"syncEndTime" : end_time.strftime(TIME_FORMAT),
 			"pageSize" : 50000		
 		}	
+		request_log_data={
+			"syncStartDate" : start_time.strftime(DATE_FORMAT),
+			"syncEndDate" : end_time.strftime(DATE_FORMAT),
+			"syncStartTime" : start_time.strftime(TIME_FORMAT),
+			"syncEndTime" : end_time.strftime(TIME_FORMAT),
+			"pageSize" : 50000		,
+			"reference_doctype":"Callyzer Call Log"
+		}	
+
 		# call URL
-		integration_request=create_request_log(data=frappe._dict(data),integration_type="Remote",service_name="Callyzer")
+		integration_request=create_request_log(data=frappe._dict(request_log_data),integration_type="Remote",service_name="Callyzer")
 		response = make_post_request(url, headers=headers, data=data)
 		frappe.db.set_value('Integration Request', integration_request.name, 'output',frappe._dict(response))
 
