@@ -111,7 +111,7 @@ def make_callyzer_call_log_records(call_row,integration_request):
 	# customer_mobile_search=re.search(pattern, call_row.get('client',None))
 	customer_mobile=call_row.get('client',None).rsplit("(")[-1].strip(")").lstrip('0').rsplit("+91")[-1]
 	employee_mobile=call_row.get('employee',None).rsplit("(")[-1].strip(")").lstrip('0')
-	date=getdate(format_date(call_row.get('date',None)))
+	date=getdate(format_date(call_row.get('date',None),'yyyy-mm-dd'))
 	time=format_time(call_row.get('time',None))
 	existing_callyzer_call_log = frappe.db.get_value("Callyzer Call Log", {"customer_mobile": customer_mobile,"date":date,"time":time})
 	if not existing_callyzer_call_log:
@@ -121,7 +121,7 @@ def make_callyzer_call_log_records(call_row,integration_request):
 		if len(client)>140:
 			client=client[0:140]
 		callyzer_call_log.client=client
-		callyzer_call_log.date=getdate(format_date(call_row.get('date',None)))
+		callyzer_call_log.date=date
 		callyzer_call_log.time=format_time(call_row.get('time',None))
 		callyzer_call_log.duration=duration_to_seconds(call_row.get('duration') if call_row.get('duration')!=None else '0s')
 		callyzer_call_log.calltype=call_row.get('callType')
