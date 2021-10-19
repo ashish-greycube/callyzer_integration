@@ -27,6 +27,13 @@ def execute(filters=None):
 			"width": 90
 		},
 		{
+			"label": _("Source"),
+			"fieldname": "source",
+			"fieldtype": "Link",
+			"options": "Lead Source",
+			"width": 130
+		},		
+		{
 			"label": _("Territory"),
 			"fieldname": "territory",
 			"fieldtype": "Link",
@@ -103,7 +110,7 @@ def execute(filters=None):
 	]
 
 	data = frappe.db.sql('''
-select lead.name as lead_id,user.full_name as lead_owner,lead.status,lead.territory,lead.lead_name,lead.company_name as organization,lead.mobile_no,
+select lead.name as lead_id,user.full_name as lead_owner,lead.status,lead.source,lead.territory,lead.lead_name,lead.company_name as organization,lead.mobile_no,
 TIMESTAMPDIFF(SECOND,lead.creation,min(addtime(call_log.date, call_log.time))) as `first_call_response_time`,
 MIN(call_log.time) as first_call,MAX(call_log.`time`) as last_call, COUNT(call_log.name) as total_calls,
 COUNT(CASE WHEN call_log.calltype = 'Outgoing' THEN call_log.name ELSE NULL END) as outgoing_calls,
