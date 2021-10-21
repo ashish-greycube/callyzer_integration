@@ -96,8 +96,7 @@
    "fieldtype": "Data",
    "in_standard_filter": 1,
    "label": "Customer Mobile",
-   "options": "Phone",
-   "read_only": 1
+   "options": "Phone"
   },
   {
    "fieldname": "raw_log",
@@ -116,7 +115,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-20 18:31:46.354378",
+ "modified": "2021-10-21 18:26:34.231764",
  "modified_by": "Administrator",
  "module": "Callyzer ERPNext Integration",
  "name": "Callyzer Call Log",
