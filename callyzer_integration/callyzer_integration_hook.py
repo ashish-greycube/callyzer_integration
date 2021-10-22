@@ -110,6 +110,7 @@ def make_callyzer_call_log_records(call_row,integration_request):
 	# pattern = "\((.*?)\)"
 	# customer_mobile_search=re.search(pattern, call_row.get('client',None))
 	customer_mobile=call_row.get('client',None).rsplit("(")[-1].strip(")").lstrip('0').rsplit("+91")[-1]
+	customer_mobile=customer_mobile[-10:]
 	employee_mobile=call_row.get('employee',None).rsplit("(")[-1].strip(")").lstrip('0')
 	date=getdate(format_date(call_row.get('date',None),'yyyy-mm-dd'))
 	time=format_time(call_row.get('time',None))
