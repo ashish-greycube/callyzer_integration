@@ -66,7 +66,7 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 		# call URL
 		integration_request=create_request_log(data=frappe._dict(request_log_data),integration_type="Remote",service_name="Callyzer")
 		response = make_post_request(url, headers=headers, data=data)
-		frappe.db.set_value('Integration Request', integration_request.name, 'output',frappe._dict(response))
+		frappe.db.set_value('Integration Request', integration_request.name, 'output',json.dumps(response))
 
 		output=frappe.db.get_value('Integration Request', integration_request.name, 'output')
 		if not output:
