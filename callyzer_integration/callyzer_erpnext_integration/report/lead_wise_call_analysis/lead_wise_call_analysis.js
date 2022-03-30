@@ -17,6 +17,18 @@ frappe.query_reports["Lead Wise Call Analysis"] = {
 			"fieldtype": "Date",
 			"reqd": 1,
 			"default":frappe.datetime.nowdate()
-		}
+		},
+		{
+			"fieldname": "lead_owner",
+			"label": __("Lead Owner"),
+			"fieldtype": "Link",
+			"options": "User"
+		},
+		{
+			"fieldname": "source",
+			"label": __("Source"),
+			"fieldtype": "Link",
+			"options": "Lead Source"
+		}				
 	]
 };

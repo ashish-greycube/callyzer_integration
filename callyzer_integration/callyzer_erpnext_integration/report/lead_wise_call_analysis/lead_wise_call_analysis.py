@@ -34,6 +34,24 @@ def execute(filters=None):
 			"width": 130
 		},		
 		{
+			'fieldname': 'lead_created_on',
+			'label': _('Lead Created On'),
+			'fieldtype': 'Date',
+			'width': 110
+		},	
+		{
+			'fieldname': 'lead_converted_on',
+			'label': _('Lead Converted On'),
+			'fieldtype': 'Date',
+			'width': 110
+		},	
+		{
+			'fieldname': 'turnaround_time',
+			'label': _('TAT(Days)'),
+			'fieldtype': 'Data',
+			'width': 110
+		},						
+		{
 			"label": _("Territory"),
 			"fieldname": "territory",
 			"fieldtype": "Link",
@@ -110,7 +128,10 @@ def execute(filters=None):
 	]
 
 	data = frappe.db.sql('''
-select lead.name as lead_id,user.full_name as lead_owner,lead.status,lead.source,lead.territory,lead.lead_name,lead.company_name as organization,lead.mobile_no,
+select lead.name as lead_id,user.full_name as lead_owner,lead.status,
+lead.creation as lead_created_on, customer.creation as lead_converted_on, 
+DATEDIFF(customer.creation,lead.creation) as turnaround_time,
+lead.source,lead.territory,lead.lead_name,lead.company_name as organization,lead.mobile_no,
 TIMESTAMPDIFF(SECOND,lead.creation,min(addtime(call_log.date, call_log.time))) as `first_call_response_time`,
 MIN(call_log.time) as first_call,MAX(call_log.`time`) as last_call, COUNT(call_log.name) as total_calls,
 COUNT(CASE WHEN call_log.calltype = 'Outgoing' THEN call_log.name ELSE NULL END) as outgoing_calls,
@@ -122,8 +143,22 @@ inner join `tabLead` lead
 on call_log.customer_mobile = lead.mobile_no 
 inner join `tabUser` user
 on user.name=lead.lead_owner
-where date(call_log.date) between %s and %s
+left outer join `tabCustomer` customer
+on lead.name=customer.lead_name 
+where date(call_log.date) between %(from_date)s and %(to_date)s
+{conditions}
 group by lead.mobile_no
 order by call_log.creation desc
-	''', (filters.from_date, filters.to_date))
+	'''.format(conditions=get_conditions(filters)), filters, as_dict=1)
 	return columns, data
+
+def get_conditions(filters) :
+	conditions = []
+
+	if filters.get("lead_owner"):
+		conditions.append(" and lead.lead_owner=%(lead_owner)s")
+
+	if filters.get("source"):
+		conditions.append(" and lead.source=%(source)s")
+
+	return " ".join(conditions) if conditions else ""
