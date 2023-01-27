@@ -99,9 +99,9 @@ def fetch_callyzer_data_and_make_integration_request(callyzer_settings):
 		print(e)
 		frappe.db.set_value('Integration Request', integration_request.name, 'status', 'Failed')
 		if hasattr(e, 'response'):
-			frappe.log_error(frappe.get_traceback()+'\n\n\n'+json.dumps(data)+'\n\n\n'+e.response.text, title=_('Callyzer Error'))
+			frappe.log_error(message=frappe.get_traceback()+'\n\n\n'+json.dumps(data)+'\n\n\n'+e.response.text, title=_('Callyzer Error'))
 		else:
-			frappe.log_error(frappe.get_traceback()+'\n\n\n'+json.dumps(data), title=_('Callyzer Error'))
+			frappe.log_error(message=frappe.get_traceback()+'\n\n\n'+json.dumps(data), title=_('Callyzer Error'))
 			# set last time, as error is not with api cal but in data..so move ahead
 			frappe.db.set_value('Callyzer Settings','Callyzer Settings', 'last_api_call_time', end_time)
 		return		
